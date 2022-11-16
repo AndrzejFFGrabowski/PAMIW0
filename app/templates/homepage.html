@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head><title>Strona zalogowanego uzytkownika</title>
+  <link rel="stylesheet" href="css/mystyle.css">
+</head>
+
+ <body>
+  Witaj zalogowany uzytkowniku!
+  <hr>
+  <form action="/search" method="post">
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for products..">
+  <input name="submit"   value="szukaj" type="submit"/>
+  </form>
+  <table id="myTable">
+    <tr class="header">
+      <th style="width:60%;">produkt</th>
+      <th style="width:40%;">cena</th>
+    </tr>
+    <tr>
+      <td>ser</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>kielbasa suszona</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>maslo</td>
+      <td>15</td>
+    </tr>
+    <tr>
+        <td>szynka</td>
+        <td>22</td>
+      </tr>
+    <tr>
+      <td>arbuz</td>
+      <td>10</td>
+    </tr>
+    <tr>
+        <td>ananas</td>
+        <td>5</td>
+      </tr>
+
+  </table>
+</body>
+
+<script>
+  function myFunction() {
+    var input, filter, table, tr, td, i, text;
+    input = document.getElementById("myInput");
+    table = document.getElementById("myTable");
+    filter = input.value.toUpperCase();
+    tr = table.getElementsByTagName("tr");
+  
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        text = td.textContent || td.innerText;
+        if (text.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+  </script>
+ 
+</html>
