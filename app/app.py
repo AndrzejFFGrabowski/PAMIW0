@@ -14,7 +14,7 @@ load_dotenv(verbose=True)
 JWT_SECRET = getenv("JWT_SECRET")
 SECRET_CREDENTIALS=getenv("SECRET_CREDENTIALS")
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='./templates',static_folder='./static')
 
 
 @app.route('/', methods=["GET"])

@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Test różnych rodzajów odpytywania</title>
+     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mystyle.css') }}"/>
+  </head>
+  
+  <body>
+    <p>(przejdź do wersji wykorzystującej <a href="/sse">server-sent events</a>)</p> 
+
+    <form action="/job" id="start" method="post">
+      <input type="hidden" value="10" name="workload"/>
+      <input type="submit" value="start" name="start"/>
+    </form>
+   
+    <form action="/reset" id="reset" method="post">
+      <input type="submit" value="reset" name="reset"/>
+    </form>
+   
+    <p>Ta aplikacja pozwala na przetestowanie dwóch rodzajów odpytywania (proszę, korzystaj tylko z jednego na raz ;))</p>
+    <ul>
+      <li><a href="/#" id="ajax-polling">start</a> Ajax-polling</li>
+    </ul>
+     <p>Poniżej będą wyświetlane komunikaty.</p>
+  </body>
+</html>
