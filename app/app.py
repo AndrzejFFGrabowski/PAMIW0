@@ -6,8 +6,16 @@ from uuid  import uuid4
 from bcrypt import checkpw
 from authentication import authenticated_users, authenticate
 from homepageLogic import generateSite, searchLogic
+from dotenv import load_dotenv
+from os import getenv
+
+load_dotenv(verbose=True)
+
+JWT_SECRET = getenv("JWT_SECRET")
+SECRET_CREDENTIALS=getenv("SECRET_CREDENTIALS")
 
 app = Flask(__name__)
+
 
 @app.route('/', methods=["GET"])
 def index():
@@ -29,5 +37,5 @@ def with_url(argument):
 def search():
     return searchLogic()
 
-if __name__ == '__main__':
-    app.run(host="192.168.1.46", port=5050)
+#if __name__ == '__main__':
+#    app.run(host="192.168.1.122", port=5050)

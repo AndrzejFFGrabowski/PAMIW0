@@ -2,7 +2,7 @@ FROM python:alpine
 WORKDIR /var/www
 ENV FLASK_APP app/app.py
 ENV FLASK_DEBUG false
-ENV FLASK_RUN_HOST 192.168.1.46
+ENV FLASK_RUN_HOST 0.0.0.0
 ENV FLASK_RUN_PORT 5050
 RUN apk add --no-cache gcc musl-dev linux-headers
 COPY requirements.txt requirements.txt
