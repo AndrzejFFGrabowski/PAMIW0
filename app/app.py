@@ -6,6 +6,7 @@ from uuid  import uuid4
 from bcrypt import checkpw
 from authentication import authenticated_users, authenticate
 from homepageLogic import generateSite, searchLogic
+from sqlLogic import generateSqlSite, fuc
 from dotenv import load_dotenv
 from os import getenv
 
@@ -37,5 +38,9 @@ def with_url(argument):
 def search():
     return searchLogic()
 
+@app.route("/sql", methods=["GET"])
+def generateSql():
+    return generateSqlSite()
+    
 #if __name__ == '__main__':
 #    app.run(host="192.168.1.122", port=5050)
