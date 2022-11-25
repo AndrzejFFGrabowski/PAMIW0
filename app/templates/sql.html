@@ -6,12 +6,37 @@
 
  <body>
   Dodaj produkt do koszyka
-  
-  
+      <form action="/with-json" method="post" id="form-json">
+          <input name="product" value=""  type="text"/>
+          <input name="id" value="" type="number"/>
+          <input name="submit"   value="wyślij" type="submit"/>
+      </form>
+    </p>
+    Pokaz koszyk
+	<form action="/showProducts" method="get">
+		<input name="submit"   value="pokaz" type="submit"/>
+	</form>
 </body>
 
 <script>
-  
-  </script>
+      window.addEventListener("load", function() {
+        console.info("Inicjalizuję obsługę formularza wysyłającego asynchronicznie JSON");
+        form_json = document.getElementById("form-json");
+        form_json.addEventListener("submit", function(event) {
+          event.preventDefault();
+          console.info("Zablokowano domyślną obsługę");
+
+          data = new FormData(form_json);
+          json = JSON.stringify(Object.fromEntries(data));
+
+          fetch("/with-json", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: json
+          }).then((response) => response.text())
+            .then((text) => console.info(text));
+        });
+      });
+    </script>
  
 </html>
