@@ -3,7 +3,7 @@ import sqlite3
 from sqlite3 import Error
 
 def generateSqlSite():
-    create_connection("pythonDB.db",""" CREATE TABLE IF NOT EXISTS products (
+    create_connection("app/db/pythonDB.db",""" CREATE TABLE IF NOT EXISTS products (
                                         id integer PRIMARY KEY,
                                         name text NOT NULL
                                     ); """)
@@ -21,7 +21,6 @@ def create_connection(db_file,sql):
     try:
         conn = sqlite3.connect(db_file)
         print(sqlite3.version)
-        print("it's alive")
         print(sql)
     except Error as e:
         print(e)
