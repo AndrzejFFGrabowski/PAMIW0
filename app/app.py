@@ -6,8 +6,10 @@ from uuid  import uuid4
 from bcrypt import checkpw
 from authentication import authenticated_users, authenticate
 from homepageLogic import generateSite, searchLogic
+import registration
 
 app = Flask(__name__)
+
 
 @app.route('/', methods=["GET"])
 def index():
@@ -29,5 +31,9 @@ def with_url(argument):
 def search():
     return searchLogic()
 
+@app.route("/register", methods=["GET", "POST"])
+def registerMain():
+	return register()
+
 if __name__ == '__main__':
-    app.run(host="192.168.1.46", port=5050)
+    app.run(host="0.0.0.0", port=5050)
