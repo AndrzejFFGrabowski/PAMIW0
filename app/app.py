@@ -33,7 +33,6 @@ def with_url(argument):
 @app.route("/search", methods=["GET", "POST"])
 def search():
 	word = get_user(1).username
-	print(word)
 	return word
     #return searchLogic()
 

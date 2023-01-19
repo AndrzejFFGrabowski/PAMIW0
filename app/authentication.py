@@ -2,10 +2,10 @@ from flask import Flask
 from flask import request, redirect
 from flask import make_response, render_template
 from uuid  import uuid4
-from bcrypt import checkpw
+import bcrypt as bc
 import databaseTool as dbt
 
-hashed_password = b'$2b$12$YegDi5sS7DB4QCA9/XfEGu4P7VFgKs5qaXjUqW87QI9V2kv3qFJaC'
+#hashed_password = b'$2b$12$YegDi5sS7DB4QCA9/XfEGu4P7VFgKs5qaXjUqW87QI9V2kv3qFJaC'
 authenticated_users = {"71991798-5b27-4e88-85a4-1beec1e6da58" : "bach"}
 
 def authenticate(request):
@@ -13,9 +13,10 @@ def authenticate(request):
     return render_template("forms.html")
   
   username = request.form.get("username", "")
-  print(dbt.getPassword(username))
   password = request.form.get("password", "")
-  if username == "admin" and checkpw(bytes(password, "utf-8"), hashed_password):
+  hashed_password, correct_hash=dbt.getPassword(username,password)
+  print(correct_hash)
+  if username == "admin" and bc.checkpw(bytes(password, "utf-8"), correct_hash):
     sid = str(uuid4())
 
     authenticated_users[sid] = "admin"
@@ -26,4 +27,9 @@ def authenticate(request):
   return "Wrong username or password", 400
 
 def registerInDatabase(request):
-	dbt.putInDatabase(request)
+	login = request.form.get("login", "")
+	password = request.form.get("password", "")
+	email_address = request.form.get("email", "")
+	salt = bc.gensalt()
+	hashed = bc.hashpw(bytes(password, "utf-8"),salt)
+	dbt.putInDatabase(request, login, hashed, email_address, salt)
