@@ -1,23 +1,22 @@
 from flask_login import UserMixin, LoginManager, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
-import os
+Wysłano
+def init():
+	JWT_SECRET = getenv("JWT_SECRET")
 
+	app.config['SECRET_KEY'] = JWT_SECRET
+	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app_data.db'
+	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-
-#def init(app):
-JWT_SECRET = os.getenv("JWT_SECRET")
-app.config['SECRET_KEY'] = JWT_SECRET
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app_data.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
+	login_manager = LoginManager()
+	login_manager.init_app(app)
+	login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-db = SQLAlchemy(App)
+db = SQLAlchemy(app)
 
 class User(db.Model, UserMixin):
     tablename = 'user'
