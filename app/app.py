@@ -10,6 +10,7 @@ from flask_login import UserMixin, LoginManager, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
 import os
 import bcrypt
+import databaseTool
 
 app = Flask(__name__)
 
@@ -39,12 +40,15 @@ def with_url(argument):
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    return searchLogic()
+	word = get_user(1).username
+	print(word)
+	return word
+    #return searchLogic()
 
 #database
 
 @login_manager.user_loader
-def load_user(user_id):
+def get_user(user_id):
     return User.query.get(int(user_id))
 
 db = SQLAlchemy(app)
