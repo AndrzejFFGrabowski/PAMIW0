@@ -2,7 +2,7 @@ from flask import make_response, render_template
 import requests
 import json
 
-uri = "http://127.0.0.1:5000/jsonrpc"
+uri = "http://192.168.1.121:8080/jsonrpc"
 headers = {'content-type': 'application/json'}
 
 def generateSite():
@@ -10,14 +10,17 @@ def generateSite():
 
 def searchLogic():
 	payload = {
-        "method": "echo",
-        "params": ["echome!"],
+        "method": "add",
+        "params": [1, 2],
         "jsonrpc": "2.0",
-        "id": 0,
+        "id": 1,
     }
 	r = requests.post(
 		uri,data=json.dumps(payload), headers=headers).json()
-	assert response["result"] == "echome!"
-	assert response["jsonrpc"] == "2.0" 
-	assert response["id"] == 0 
+	assert r["result"] == 3
+	assert r["jsonrpc"] == "2.0" 
+	assert r["id"] == 1 
 	return r
+
+
+	
