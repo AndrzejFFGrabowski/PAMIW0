@@ -8,18 +8,17 @@ headers = {'content-type': 'application/json'}
 def generateSite():
     return render_template("homepage.html")
 
-def searchLogic():
+def searchLogic(request):
+	A = request.form.get("A", "")
+	B = request.form.get("B", "")
 	payload = {
-        "method": "add",
-        "params": [1, 2],
+        "method": "mul",
+        "params": [A , B],
         "jsonrpc": "2.0",
         "id": 1,
     }
 	r = requests.post(
 		uri,data=json.dumps(payload), headers=headers).json()
-	assert r["result"] == 3
-	assert r["jsonrpc"] == "2.0" 
-	assert r["id"] == 1 
 	return r
 
 

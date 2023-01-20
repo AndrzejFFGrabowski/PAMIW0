@@ -4,7 +4,7 @@ from flask import request, redirect
 from flask import make_response, render_template
 from uuid  import uuid4
 from bcrypt import checkpw
-from authentication import authenticated_users, authenticate, registerInDatabase
+from authentication import authenticate, registerInDatabase
 from homepageLogic import generateSite, searchLogic
 from flask_login import UserMixin, LoginManager, login_user, logout_user
 from flask_sqlalchemy import SQLAlchemy
@@ -19,9 +19,9 @@ app=initApp()
 @app.route('/', methods=["GET"])
 def index():
     #return render_template("forms.html")
-    sid = request.cookies.get("sid")
-    if sid in authenticated_users:
-        return generateSite()
+    #sid = request.cookies.get("sid")
+    #if sid in authenticated_users:
+    #    return generateSite()
     return redirect("/authenticate", code=302)
 
 @app.route("/authenticate", methods=["GET", "POST"])
@@ -34,7 +34,7 @@ def with_url(argument):
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-    return searchLogic()
+    return searchLogic(request)
 
 #database
 

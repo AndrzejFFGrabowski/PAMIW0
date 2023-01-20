@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head><title>Strona zalogowanego uzytkownika</title>
-  <link rel="stylesheet" href="css/mystyle.css">
+  		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/mystyle.css') }}"/>
 </head>
 
  <body>
@@ -9,6 +9,8 @@
   <hr>
   <form action="/search" method="post">
   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for products..">
+  <input name = "A" type="number">
+  <input name = "B" type="number">
   <input name="submit"   value="szukaj" type="submit"/>
   </form>
   <table id="myTable">
