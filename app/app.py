@@ -14,6 +14,8 @@ from startup import initApp
 
 app=initApp()
 
+#searchLogic()
+
 @app.route('/', methods=["GET"])
 def index():
     #return render_template("forms.html")
@@ -32,9 +34,7 @@ def with_url(argument):
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
-	word = get_user(1).username
-	return word
-    #return searchLogic()
+    return searchLogic()
 
 #database
 
